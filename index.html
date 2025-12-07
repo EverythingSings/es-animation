@@ -49,6 +49,174 @@
       color: rgba(255,255,255,0.2);
       user-select: none;
     }
+
+    /* Info button */
+    .info-btn {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      user-select: none;
+    }
+
+    .info-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(237, 159, 42, 0.3);
+      color: rgba(237, 159, 42, 0.8);
+      transform: scale(1.05);
+    }
+
+    /* Modal overlay */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 15, 0.85);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1000;
+      padding: 5vmin;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Glass modal */
+    .modal {
+      background: rgba(20, 20, 28, 0.7);
+      backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      max-width: 680px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: clamp(24px, 5vw, 48px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      transform: scale(0.95) translateY(20px);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .modal-overlay.active .modal {
+      transform: scale(1) translateY(0);
+    }
+
+    /* Close button */
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 18px;
+      line-height: 1;
+      transition: all 0.2s;
+    }
+
+    .close-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Modal content */
+    .modal h1 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(20px, 4vw, 28px);
+      font-weight: 600;
+      color: #ED9F2A;
+      margin: 0 0 24px 0;
+      letter-spacing: -0.02em;
+    }
+
+    .modal h2 {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(16px, 3vw, 20px);
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 32px 0 12px 0;
+      letter-spacing: -0.01em;
+    }
+
+    .modal p {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      font-size: clamp(13px, 2.5vw, 15px);
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 12px 0;
+    }
+
+    .modal code {
+      font-family: 'SF Mono', 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 0.9em;
+      background: rgba(237, 159, 42, 0.1);
+      border: 1px solid rgba(237, 159, 42, 0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #ED9F2A;
+    }
+
+    .modal blockquote {
+      border-left: 3px solid rgba(237, 159, 42, 0.4);
+      padding-left: 20px;
+      margin: 24px 0;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .color-swatch {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      margin-right: 8px;
+      vertical-align: middle;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Scrollbar */
+    .modal::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    .modal::-webkit-scrollbar-track {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 4px;
+    }
+
+    .modal::-webkit-scrollbar-thumb {
+      background: rgba(237, 159, 42, 0.3);
+      border-radius: 4px;
+    }
+
+    .modal::-webkit-scrollbar-thumb:hover {
+      background: rgba(237, 159, 42, 0.5);
+    }
   </style>
 </head>
 <body>
@@ -66,6 +234,49 @@
   </div>
 
   <div class="formula">x(t) = sin(2t + π/5) · y(t) = sin(3t)</div>
+
+  <!-- Info button -->
+  <button class="info-btn" id="infoBtn" aria-label="About">i</button>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="close-btn" id="closeBtn" aria-label="Close">×</button>
+
+      <h1>The EverythingSings Sigil</h1>
+
+      <p><code>x(t) = sin(2t + π/5)</code><br><code>y(t) = sin(3t)</code></p>
+
+      <h2>The Perfect Fifth (2:3)</h2>
+      <p>The frequency ratio 2:3 is the <strong>Perfect Fifth</strong> — the most consonant musical interval after the octave. It appears in every musical tradition across human history. When two frequencies vibrate in 2:3 ratio, they produce a sound that the human ear perceives as fundamentally harmonious.</p>
+      <p>This is not metaphor. The logo is literally a visualization of harmony.</p>
+
+      <h2>The Golden Connection (π/5)</h2>
+      <p>The phase shift δ = π/5 = 36° carries deep geometric significance:</p>
+      <p><code>cos(π/5) = φ/2</code></p>
+      <p>Where φ = (1 + √5)/2 ≈ 1.618034 is the <strong>golden ratio</strong>.</p>
+      <p>The angle 36° is the central angle of a golden gnomon — the acute isoceles triangle found in pentagrams and pentagons. This connects the curve to phyllotaxis (spiral arrangements in plants), Fibonacci sequences, and classical proportion in art and architecture.</p>
+
+      <h2>Color Derivation</h2>
+      <p>The colors are not chosen — they are derived mathematically from the formula parameters.</p>
+      <p><span class="color-swatch" style="background: #ED9F2A;"></span><strong>Primary:</strong> HSL(36°, 85%, 55%) = <code>#ED9F2A</code><br>The hue comes directly from δ = π/5 = 36° on the color wheel.</p>
+      <p><span class="color-swatch" style="background: #1CC8B6;"></span><strong>Secondary:</strong> HSL(173.5°, 75%, 45%) = <code>#1CC8B6</code><br>Primary + Golden Angle (137.5°) for maximum visual separation.</p>
+      <p><span class="color-swatch" style="background: #E519C0;"></span><strong>Accent:</strong> HSL(311°, 80%, 50%) = <code>#E519C0</code><br>Primary + 2× Golden Angle completes the triad.</p>
+
+      <blockquote>
+        "The EverythingSings sigil is a Lissajous curve — a visual representation of two frequencies singing together. The 2:3 ratio is the Perfect Fifth, the interval that defines consonance in music. The phase shift of π/5 encodes half the golden ratio, connecting sound to the spiral geometries of nature.
+        <br><br>
+        This is what harmony looks like when you freeze it in space.
+        <br><br>
+        Everything sings. This is the shape of the song."
+      </blockquote>
+
+      <p style="margin-top: 32px; font-size: 0.9em; color: rgba(255,255,255,0.4);">
+        <em>Generated mathematically. Not designed — discovered.</em><br>
+        December 7, 2025
+      </p>
+    </div>
+  </div>
 
   <script>
     const a = 2, b = 3;
@@ -95,6 +306,35 @@
     }
 
     requestAnimationFrame(animate);
+
+    // Modal functionality
+    const infoBtn = document.getElementById('infoBtn');
+    const modalOverlay = document.getElementById('modalOverlay');
+    const closeBtn = document.getElementById('closeBtn');
+
+    // Open modal
+    infoBtn.addEventListener('click', () => {
+      modalOverlay.classList.add('active');
+    });
+
+    // Close modal on close button
+    closeBtn.addEventListener('click', () => {
+      modalOverlay.classList.remove('active');
+    });
+
+    // Close modal on overlay click
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) {
+        modalOverlay.classList.remove('active');
+      }
+    });
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+        modalOverlay.classList.remove('active');
+      }
+    });
   </script>
 </body>
 </html>
